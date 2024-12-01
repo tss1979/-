@@ -1,8 +1,8 @@
 from django.urls import path
 
 from users.apps import UsersConfig
-from users.views import UserUpdateAPIView, PaymentListAPIView, UserDestroyAPIView, \
-    UserCreateAPIView, UserListAPIView, UserRetrieveAPIView, PaymentCreateAPIView
+from users.views import UserUpdateAPIView, UserDestroyAPIView, \
+    UserCreateAPIView, UserListAPIView, UserRetrieveAPIView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
