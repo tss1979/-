@@ -3,7 +3,6 @@ from django.urls import path
 
 
 from habits.apps import HabitsConfig
-from habits.models import CompletedHabit
 from habits.views import MyHabitListAPIView, PublicHabitListAPIView, HabitRetrieveAPIView, HabitCreateAPIView, \
     HabitUpdateAPIView, HabitDestroyAPIView, HabitCompleteCreateAPIView
 
