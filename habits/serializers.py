@@ -17,12 +17,13 @@ class HabitSerializer(serializers.ModelSerializer):
         r_habit = data.get("related_habit", None)
         if r_habit:
             list_habits = [Habit.objects.filter(pk=habit.pk).first() for habit in r_habit]
-            habit_status  = [h.is_pleasant for h in list_habits]
+            habit_status = [h.is_pleasant for h in list_habits]
             if not all(habit_status):
                 raise serializers.ValidationError("Нельзя назначить связанную привычку, которая не является приятной")
         if data.get("is_pleasant", None) and (data.get("reward", None) or data.get("related_habit", None)):
             raise serializers.ValidationError("У приятной привычки не может быть вознаграждения или связанной привычки")
         return data
+
 
 class CompletedHabitSerializer(serializers.ModelSerializer):
     class Meta:
@@ -38,8 +39,3 @@ class CompletedHabitSerializer(serializers.ModelSerializer):
         if c_habit and (datetime.datetime.now().astimezone() - c_habit.completed_at).days >= 7:
             raise serializers.ValidationError("Нельзя выполнять привычку реже, чем 1 раз в 7 дней")
         return data
-
-
-
-
-

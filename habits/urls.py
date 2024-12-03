@@ -1,10 +1,9 @@
-from rest_framework.routers import DefaultRouter
 from django.urls import path
 
 
 from habits.apps import HabitsConfig
-from habits.views import MyHabitListAPIView, PublicHabitListAPIView, HabitRetrieveAPIView, HabitCreateAPIView, \
-    HabitUpdateAPIView, HabitDestroyAPIView, HabitCompleteCreateAPIView
+from habits.views import MyHabitListAPIView, PublicHabitListAPIView, HabitRetrieveAPIView,\
+    HabitCreateAPIView, HabitUpdateAPIView, HabitDestroyAPIView, HabitCompleteCreateAPIView
 
 app_name = HabitsConfig.name
 

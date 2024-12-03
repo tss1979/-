@@ -25,6 +25,7 @@ class MyHabitListAPIView(generics.ListAPIView):
     permission_classes = [IsAuthenticated, IsOwnerPermission | UserIsModeratorPermission]
     pagination_class = HabitPaginator
 
+
 class PublicHabitListAPIView(generics.ListAPIView):
     serializer_class = HabitSerializer
     queryset = Habit.objects.filter(is_public=True)
@@ -48,6 +49,7 @@ class HabitDestroyAPIView(generics.DestroyAPIView):
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated, UserIsStaffPermission | IsOwnerPermission]
 
+
 class HabitCompleteCreateAPIView(generics.CreateAPIView):
     serializer_class = CompletedHabitSerializer
     permission_classes = [IsAuthenticated, ]
@@ -55,7 +57,9 @@ class HabitCompleteCreateAPIView(generics.CreateAPIView):
     def perform_create(self, serializer):
         habit = serializer.validated_data.get("habit", None)
         if habit:
-            c_habit = CompletedHabit.objects.filter(habit_id=habit, owner_id=self.request.user).first()
+            c_habit = CompletedHabit.objects.filter(
+                habit_id=habit,
+                owner_id=self.request.user).first()
             if c_habit:
                 c_habit.completed_at = datetime.datetime.now().astimezone()
                 c_habit.save()
@@ -63,5 +67,3 @@ class HabitCompleteCreateAPIView(generics.CreateAPIView):
                 new_c_habit = serializer.save()
                 new_c_habit.owner = self.request.user
                 new_c_habit.save()
-
-

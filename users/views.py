@@ -34,9 +34,3 @@ class UserDestroyAPIView(generics.DestroyAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
     permission_classes = [IsOwnerPermission | UserIsStaffPermission]
-
-
-
-
-
-

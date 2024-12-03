@@ -1,8 +1,5 @@
 from datetime import datetime
-
 from django.db import models
-
-from config import settings
 from users.models import User
 
 NULLABLE = {'blank': True, 'null': True}
@@ -22,12 +19,8 @@ class Habit(models.Model):
         'Habit', **NULLABLE,
         verbose_name='связанная привычка')
 
+
 class CompletedHabit(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='пользователь', **NULLABLE)
     habit = models.ForeignKey(Habit, on_delete=models.CASCADE, verbose_name='привычка')
     completed_at = models.DateTimeField(default=datetime.now(), verbose_name='время завершения')
-
-
-
-
-

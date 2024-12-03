@@ -40,7 +40,7 @@ class   HabitTestCase(APITestCase):
     def test_lesson_update(self):
         """Тестирование изменения привычки"""
         url = reverse("habits:habit-update", args=(self.habit.pk,))
-        data = {"action": "Walk",}
+        data = {"action": "Walk", }
         response = self.client.patch(url, data=data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Habit.objects.all().count(), 1)
@@ -91,4 +91,3 @@ class   HabitTestCase(APITestCase):
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Habit.objects.all().count(), 2)
-
